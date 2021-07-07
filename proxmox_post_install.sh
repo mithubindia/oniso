@@ -68,6 +68,7 @@ sed -i.original.1 "s/pve-docs/docs/g;s/Proxmox VE/Virtual/g" $FILE
 
 # Change Grub Text
 sed -i.original "s/Proxmox VE/Virtualisation Server/g" /etc/default/grub
+sed -i.original "s/Proxmox VE/Virtualisation Server/g" /etc/default/grub.d/proxmox-ve.cfg
 
 # Passthrough
 sed -i.original "s/quiet/quiet intel_iommu=on/g" /etc/default/grub
