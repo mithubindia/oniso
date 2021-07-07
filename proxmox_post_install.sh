@@ -1,7 +1,7 @@
 #!/bin/bash
 # Add required software
 apt update
-apt install -y at vim mlocate net-tools zip rkhunter curl wget libsasl2-modules aria2 sudo
+apt install -y at vim mlocate net-tools zip curl wget libsasl2-modules aria2 sudo
 
 # Backup pvemanagerlib.js
 FILE=/usr/share/pve-manager/js/pvemanagerlib.js
