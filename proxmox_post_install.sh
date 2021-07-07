@@ -1,4 +1,9 @@
 #!/bin/bash
+
+# Change Reposistories
+echo "deb http://download.proxmox.com/debian/pve bullseye pve-no-subscription" > /etc/apt/sources.list.d/virt.list
+rm /etc/apt/sources.list.d/pve-enterprise.list
+
 # Add required software
 apt update
 apt install -y at vim mlocate net-tools zip curl wget libsasl2-modules aria2 sudo
@@ -8,15 +13,21 @@ FILE=/usr/share/pve-manager/js/pvemanagerlib.js
 cp $FILE $FILE.$(date +%d_%m_%Y_%Hhr_%Mm_%Ss).original
 
 # Change Logo, Favicon, Bios Image
-mkdir -p /usr/share/custom/backup
-cp ./proxmox_logo.png /usr/share/custom
-cp ./bootsplash.jpg /usr/share/custom
-cp ./favicon-32x32.png /usr/share/custom/favicon.ico
-cp ./favicon-32x32.png /usr/share/custom/logo-128.png
-cp /usr/share/pve-manager/images/{favicon.ico,logo-128.png,proxmox_logo.png} /usr/share/custom/backup/
-cp /usr/share/qemu-server/bootsplash.jpg /usr/share/custom/backup/
-cp -f /usr/share/custom/{logo-128.png,favicon.ico,proxmox_logo.png} /usr/share/pve-manager/images/
-cp -f /usr/share/custom/bootsplash.jpg /usr/share/qemu-server/
+#mkdir -p /usr/share/custom/backup
+#cp ./proxmox_logo.png /usr/share/custom
+#cp ./bootsplash.jpg /usr/share/custom
+#cp ./favicon-32x32.png /usr/share/custom/favicon.ico
+#cp ./favicon-32x32.png /usr/share/custom/logo-128.png
+#cp /usr/share/pve-manager/images/{favicon.ico,logo-128.png,proxmox_logo.png} /usr/share/custom/backup/
+#cp /usr/share/qemu-server/bootsplash.jpg /usr/share/custom/backup/
+#cp -f /usr/share/custom/{logo-128.png,favicon.ico,proxmox_logo.png} /usr/share/pve-manager/images/
+#cp -f /usr/share/custom/bootsplash.jpg /usr/share/qemu-server/
+
+# Download files
+wget -O /usr/share/pve-manager/images/favicon.ico https://github.com/mithubindia/oniso/raw/master/favicon-32x32.png
+cp /usr/share/pve-manager/images/favicon.ico /usr/share/pve-manager/images/logo-128.png
+wget -O /usr/share/pve-manager/images/proxmox_logo.png https://github.com/mithubindia/oniso/raw/master/proxmox_logo.png
+wget -O /usr/share/qemu-server/bootsplash.jpg https://github.com/mithubindia/oniso/raw/master/bootsplash.jpg
 
 # Remove Subscription
 sed -i.original -z "s/res === null || res === undefined || \!res || res\n\t\t\t.data.status.toLowerCase() \!== 'active'/false/g" /usr/share/javascript/proxmox-widget-toolkit/proxmoxlib.js && systemctl restart pveproxy.service
