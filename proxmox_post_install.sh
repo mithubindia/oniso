@@ -43,8 +43,8 @@ sed -i.original "s/Proxmox Backup Server/Our Backup Server/g" $FILE
 # Remove Certificates
 (echo "/gettext('Certificates')"; echo "-2,+5d"; echo "wq") | ex -s $FILE
 
-# Remove Updates
-(echo "/gettext('Updates')"; echo "-3,+14d"; echo "wq") | ex -s $FILE
+# Remove Updates & Reposistories
+(echo "/gettext('Updates')"; echo "-3,+24d"; echo "wq") | ex -s $FILE
 
 # Remove VM Subscription
 (echo "/gettext('Subscription')"; echo "-1,+5d"; echo "wq") | ex -s $FILE
