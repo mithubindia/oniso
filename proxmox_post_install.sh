@@ -67,7 +67,7 @@ sed -i.original "s/Proxmox Backup Server/Our Backup Server/g" $FILE
 sed -i.original.1 "s/pve-docs/docs/g;s/Proxmox VE/Virtual/g" $FILE
 
 # Change Grub Text
-sed -i.original "s/Proxmox Virtual Environment/Virtual Server/g" /etc/default/grub
+sed -i.original "s/Proxmox VE/Virtualisation Server/g" /etc/default/grub
 
 # Passthrough
 sed -i.original "s/quiet/quiet intel_iommu=on/g" /etc/default/grub
